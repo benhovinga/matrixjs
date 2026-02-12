@@ -9,7 +9,7 @@ Use the [url query string](https://en.wikipedia.org/wiki/Query_string) to change
 **Example:** Makes the font small and red, with a white background, running fast, and with a quick fade.
 
 ```
-index.html?size=10&bg=fff&fg=F00&speed=10&alpha=0.2
+?size=10&bg=fff&fg=F00&speed=10&alpha=0.2
 ```
 
 ### Font Size
