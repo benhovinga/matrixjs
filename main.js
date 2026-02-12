@@ -19,9 +19,42 @@ function randomMatrixChar() {
 }
 
 
+/** @param {string} hex */
+function hexToRGB(hex) {
+  // Remove leading hash.
+  hex = hex.replace(/^#/, "");
+  // Expand shorthand hex codes.
+  if (hex.length === 3) {
+    hex = hex.split('').map(char => char + char).join("");
+  }
+  // Parse each hex color into its decimal version
+  const r = parseInt(hex.slice(0, 2), 16);
+  const g = parseInt(hex.slice(2, 4), 16);
+  const b = parseInt(hex.slice(4, 6), 16);
+
+  return [r, g, b];
+}
+
+
 function main() {
-  // Default font size (px).
-  const fontSize = 18;
+  // Customize the program using url search parameters.
+  const searchParams = new URLSearchParams(window.location.search);
+
+  // Set the speed. Default = 40.
+  const drawSpeed = searchParams.get("speed") || 40;
+  // Set the font size. Default = 18.
+  const fontSize = searchParams.get("size") || 18;
+  // Set the font color. Default = #00FF00.
+  const fontColor = "#" + (searchParams.get("fg") || "00FF00");
+  // Set the background color. Default = #000000.
+  const backgroundColor = hexToRGB(searchParams.get("bg") || "000000").join(", ");
+  // Set the alpha level for the background fill. Default = 0.05.
+  const backgroundAlpha = searchParams.get("alpha") || 0.05;
+
+  // Set the background fill.
+  const backgroundFill = `rgba(${backgroundColor}, ${backgroundAlpha})`;
+  // Set the body background color.
+  document.body.style.backgroundColor = `rgb(${backgroundColor})`
 
   // Setup the canvas element.
   /** @type {HTMLCanvasElement} */
@@ -46,13 +79,13 @@ function main() {
 
   // Draws a new layer on the canvas.
   function draw() {
-    // Cover the entire canvas with a highly transparent black.
+    // Cover the entire canvas with a transparent color.
     // Each call to draw will slowly fade the previously rendered text.
-    canvasContext.fillStyle = "rgba(0, 0, 0, 0.05)";
+    canvasContext.fillStyle = backgroundFill;
     canvasContext.fillRect(0, 0, canvas.width, canvas.height);
 
     // Get ready to render the new text, set its color and font styles.
-    canvasContext.fillStyle = "#0f0";
+    canvasContext.fillStyle = fontColor;
     canvasContext.font = `${fontSize}px monospace`;
 
     // Loop through each column.
@@ -71,8 +104,8 @@ function main() {
     }
   }
 
-  // Draw a new layer every 40ms.
-  setInterval(draw, 40);
+  // Draw a new layer every few ms.
+  setInterval(draw, drawSpeed);
 }
 
 
