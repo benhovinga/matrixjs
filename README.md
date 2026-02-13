@@ -19,3 +19,15 @@ Use the [url query string](https://en.wikipedia.org/wiki/Query_string) to change
 | Background Color | `bg`        | `000000`      | Hex color code (shorthand is also supported)    |
 | Background Alpha | `alpha`     | `0.05`        | Float. Higher value fades the text faster       |
 | Speed            | `speed`     | `40`          | Delay in ms between layers. Lower is faster     |
+
+## Live Demo
+
+Default settings: https://benhovinga.github.io/matrixjs/
+
+Other examples:
+
+1. https://benhovinga.github.io/matrixjs/?size=10&bg=fff&fg=F00&speed=10&alpha=0.2
+2. https://benhovinga.github.io/matrixjs/?size=24&alpha=0.1&fg=9FF
+3. https://benhovinga.github.io/matrixjs/?size=24&alpha=0.1&fg=F4F&speed=90
+4. https://benhovinga.github.io/matrixjs/?size=32&alpha=0.1&fg=FF5&speed=70
+5. https://benhovinga.github.io/matrixjs/?size=24&alpha=0.2&fg=9FF&bg=505
